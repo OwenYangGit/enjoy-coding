@@ -28,7 +28,7 @@ services:
     depends_on:
       - fake-gcs-service
       - fake-firestore-service
-  localtunner:
+  localtunnel:
     image: efrecon/localtunnel
     depends_on:
       - python-39
