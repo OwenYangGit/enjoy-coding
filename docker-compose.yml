@@ -9,14 +9,14 @@ services:
     volumes:
       - ./example/data:/data
     env_file:
-      - env
+      - dev.env
   fake-firestore-service:
     image: mtlynch/firestore-emulator-docker
     ports:
       - "8080:8080"
     restart: on-failure
     env_file:
-      - env
+      - dev.env
   python-39:
     build:
       context: .
@@ -33,4 +33,4 @@ services:
     depends_on:
       - python-39
     command:
-      --local-host python-39 --port 5000
+      --local-host python-39 --port 5000 --subdomain demochatbot
