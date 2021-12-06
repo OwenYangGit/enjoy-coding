@@ -3,6 +3,3 @@ WORKDIR /app
 COPY requirements.txt /app
 RUN pip install --default-timeout=100 -r requirements.txt
 EXPOSE 5000
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=development
-CMD python app.py
