@@ -14,3 +14,8 @@ docker-compose down
 # 刪除原本的 image，以此專案為例
 docker rmi enjoy-coding_python-39:latest
 ```
+
+## 目前安裝的套件清單
+```shell
+pip install flask google-cloud-storage google-cloud-firestore line-bot-sdk gunicorn
+```
