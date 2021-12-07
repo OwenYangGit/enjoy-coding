@@ -17,5 +17,5 @@ docker rmi enjoy-coding_python-39:latest
 
 ## 目前安裝的套件清單
 ```shell
-pip install flask google-cloud-storage google-cloud-firestore line-bot-sdk gunicorn
+pip install flask google-cloud-storage google-cloud-firestore line-bot-sdk gunicorn flask_cors
 ```
