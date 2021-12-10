@@ -49,12 +49,3 @@ class User(object):
             user_system_language = { self.user_system_language },
             blocked = { self.blocked }
             )'''    )
-    
-# u = User(
-#     user_id="1",
-#     user_nickname="hello",
-#     user_pic_url="https://localhost:5000/1/pic.png",
-#     user_system_language="chinese"
-#     )
-
-# print(u)
