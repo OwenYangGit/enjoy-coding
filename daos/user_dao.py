@@ -15,29 +15,45 @@ class UserDAO:
     # 存 user 物件，若 user 存在，採更新
     @classmethod
     def save(cls, user: User):
-        with open("users.json","rw",encoding="utf8") as file:
-            users_list = json.loads(file.read())
-            # convert user to user_dict
-            user_dict = user.to_dict()
-            for index, user in enumerate(users_list):
-                if user["user_id"] == user_dict["user_id"]:
-                    users_list[index] = user.update(user_dict)
-                    file.write(json.dumps(users_list))
+        """
+        判斷檔案是否為空，為空直接新增 user，不為空則判斷 user 是否存在
+        存在則更新，不存在則新增
+        """
+        with open("users.json","r",encoding="utf8") as file:
+            user_list = json.loads(file.read())
+
+        if user_list == []:
+            print("hello")
+            user_list.append(user.to_dict())
+        else:
+            for i in user_list:
+                print(i["user_id"])
+                print(user.to_dict()["user_id"])
+                if i["user_id"] == user.to_dict()["user_id"]:
+                    i.update(user.to_dict())
+                    print(i)
+                    break
                 else:
-                    user_dict = user.to_dict()
-                    users_list.append(user_dict)
-                    file.write(json.dumps(users_list))
-        return user.to_dict()
+                    user_list.append(user.to_dict())
+                    break
+        with open("users.json","w",encoding="utf8") as fwrite:
+            fwrite.write(json.dumps(user_list, indent=2))
     
     # 刪除 user -> 進行假刪除，將 user 的 blocked 更新為 true 代表刪除的 user
     @classmethod
     def delete(cls, user_id: str):
-        with open("users.json","rw",encoding="utf8") as file:
+        """
+        用戶存在 -> 進行修改並更新進 users.json
+        用戶不存在 -> pass
+        """
+        with open("users.json","r",encoding="utf8") as file:
             users_list = json.loads(file.read())
             for user_dict in users_list:
                 if user_dict["user_id"] == user_id:
                     user_dict["blocked"] = True
-            file.write(json.dumps(users_list))
+                    break
+        with open("users.json","w",encoding="utf8") as fwrite:
+            fwrite.write(json.dumps(users_list, indent=2))
 
     def get(user_id: str) -> User:
         with open("users.json","r", encoding="utf8") as file:
@@ -49,3 +65,27 @@ class UserDAO:
                 else:
                     pass
         
+
+# [
+#   {
+#     "user_id": "1",
+#     "user_pic_url": "http://localhost:5000/user/1/pic.png",
+#     "user_nickname": "hello",
+#     "user_system_language": "chinese",
+#     "blocked": null
+#   },
+#   {
+#     "user_id": "2",
+#     "user_pic_url": "http://localhost:5000/user/2/pic.png",
+#     "user_nickname": "world",
+#     "user_system_language": "english",
+#     "blocked": null
+#   },
+#   {
+#     "user_id": "3",
+#     "user_pic_url": "http://localhost:5000/user/3/pic.png",
+#     "user_nickname": "devops",
+#     "user_system_language": "chinese",
+#     "blocked": false
+#   }
+# ]
