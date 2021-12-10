@@ -17,22 +17,15 @@
     "user_id": "3",
     "user_pic_url": "http://localhost:5000/user/3/pic.png",
     "user_nickname": "devops",
-    "user_system_language": "japanese",
-    "blocked": true
+    "user_system_language": "english",
+    "blocked": false
   },
   {
     "user_id": "4",
     "user_pic_url": "http://localhost:5000/user/4/pic.png",
     "user_nickname": "rd",
-    "user_system_language": "english",
-    "blocked": true
-  },
-  {
-    "user_id": "5",
-    "user_pic_url": "http://localhost:5000/user/5/pic.png",
-    "user_nickname": "rd2",
     "user_system_language": "chinese",
-    "blocked": true
+    "blocked": false
   },
   {
     "user_id": "5",

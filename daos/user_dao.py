@@ -21,23 +21,17 @@ class UserDAO:
         """
         with open("users.json","r",encoding="utf8") as file:
             user_list = json.loads(file.read())
-
-        if user_list == []:
-            print("hello")
-            user_list.append(user.to_dict())
-        else:
+        
+        user_dict = user.to_dict()
+        with open("users.json","w",encoding="utf-8") as fwrite:
             for i in user_list:
-                print(i["user_id"])
-                print(user.to_dict()["user_id"])
-                if i["user_id"] == user.to_dict()["user_id"]:
-                    i.update(user.to_dict())
-                    print(i)
-                    break
-                else:
-                    user_list.append(user.to_dict())
-                    break
-        with open("users.json","w",encoding="utf8") as fwrite:
+                if i["user_id"] == user_dict["user_id"]:
+                    i.update(user_dict)
+                    fwrite.write(json.dumps(user_list, indent=2))
+                    return user_dict
+            user_list.append(user_dict)
             fwrite.write(json.dumps(user_list, indent=2))
+            return user_dict
     
     # 刪除 user -> 進行假刪除，將 user 的 blocked 更新為 true 代表刪除的 user
     @classmethod
@@ -64,28 +58,3 @@ class UserDAO:
                     return user
                 else:
                     pass
-        
-
-# [
-#   {
-#     "user_id": "1",
-#     "user_pic_url": "http://localhost:5000/user/1/pic.png",
-#     "user_nickname": "hello",
-#     "user_system_language": "chinese",
-#     "blocked": null
-#   },
-#   {
-#     "user_id": "2",
-#     "user_pic_url": "http://localhost:5000/user/2/pic.png",
-#     "user_nickname": "world",
-#     "user_system_language": "english",
-#     "blocked": null
-#   },
-#   {
-#     "user_id": "3",
-#     "user_pic_url": "http://localhost:5000/user/3/pic.png",
-#     "user_nickname": "devops",
-#     "user_system_language": "chinese",
-#     "blocked": false
-#   }
-# ]
