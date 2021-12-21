@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    env_file:
+      - dev.env
+
+  python-39:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app/
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    env_file:
+      - backend.env
+
+  ngrok :
+    image :  wernight/ngrok:latest
+    ports :
+      - "8888:4040"
+    environment :
+      NGROK_PROTOCOL :  http
+      NGROK_PORT :  python-39:5000

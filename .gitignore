@@ -1,0 +1,15 @@
+.idea
+__pycache__
+
+venv
+Lib
+Scripts
+pyvenv.cfg
+.DS_Store
+backend.env
+.vscode
+database.db
+chatbot.db
+sqlite.py
+.devcontainer
+example
