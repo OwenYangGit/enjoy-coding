@@ -13,6 +13,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from controllers.line_bot_controller import LineBotController
+from controllers.user_controller import UserController
 
 line_bot_api = LineBotApi(channel_access_token=os.environ["LINE_CHANNEL_ACCESS_TOKEN"])
 handler = WebhookHandler(channel_secret=os.environ["LINE_CHANNEL_SECRET"])
@@ -52,6 +53,11 @@ def callback():
 @handler.add(FollowEvent)
 def handle_line_follow(event):
     return LineBotController.follow_event(event)
+
+
+@app.route("/user")
+def get_user():
+    return UserController.get_user(request)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

@@ -83,7 +83,7 @@ class UserMySQLDao(UserDao):
     @classmethod
     def get_user(cls, user_id: str) -> User:
         sql = f"""
-        SELECT line_user_pic_url,line_user_nickname,line_user_status,line_user_system_language FROM User WHERE line_user_id = '{user_id}';
+        SELECT * FROM User WHERE line_user_id = '{user_id}';
         """
         try:
             user_dict = cls.cursor.execute(sql)
