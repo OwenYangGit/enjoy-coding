@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+
+  firebase-emulator:
+    image: andreysenov/firebase-tools
+    ports:
+      - "9199:9199"
+      - "9099:9099"
+      - "9005:9005"
+      - "9000:9000"
+      - "8085:8085"
+      - "8080:8080"
+      - "5001:5001"
+      - "5000:5000"
+      - "4000:4000"
+    tty: true
+    stdin_open: true
+    command: ["sh"]
+
+  gcloud-tools:
+    image: google/cloud-sdk
+    ports:
+      - "8772:8772"
+    command: ["sh","-c","gcloud beta emulators firestore start --host-port=0.0.0.0:8772"]
+
+  python-39:
+    image: python:3.9
+    volumes:
+      - ./:/app/
+    ports:
+      - "9090:9090"
+    depends_on:
+      - firebase-emulator

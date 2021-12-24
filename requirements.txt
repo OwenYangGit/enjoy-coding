@@ -1,0 +1,6 @@
+flask
+google-cloud-storage
+google-resumable-media
+functions-framework
+google-cloud-functions
+google-cloud-firestore
